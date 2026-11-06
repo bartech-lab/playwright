@@ -506,7 +506,10 @@ function parseCSSContentPropertyAsString(element: Element, content: string, isPs
 
 export function getAriaLabelledByElements(element: Element): Element[] | null {
   // Reflected element references are not available in older browsers, e.g. Chromium < 135.
-  const refs = element.ariaLabelledByElements || getIdRefs(element, element.getAttribute('aria-labelledby'));
+  // Firefox crashes when these reflected properties are read from two JS worlds,
+  // so only read them when references were not set through the attribute.
+  const attribute = element.getAttribute('aria-labelledby');
+  const refs = attribute ? getIdRefs(element, attribute) : element.ariaLabelledByElements;
   // step 2b:
   // "if the current node has an aria-labelledby attribute that contains at least one valid IDREF"
   // Therefore, if none of the refs match an element, we consider aria-labelledby to be missing.
