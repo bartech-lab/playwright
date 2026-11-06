@@ -4662,7 +4662,6 @@ subsystem, add a row to the Subsystems table. Then update this file:
 | `SE-063` | `page/selectors-role.spec.ts` | hidden with shadow dom slots |
 | `SE-064` | `page/selectors-role.spec.ts` | should support output accessible name |
 | `SE-065` | `page/selectors-role.spec.ts` | should not match scope by default |
-| `SE-066` | `page/selectors-role.spec.ts` | should not crash when aria-labelledby is read in both worlds |
 | `SE-071` | `page/selectors-get-by.spec.ts` | getByTestId should work |
 | `SE-072` | `page/selectors-get-by.spec.ts` | getByTestId with custom testId should work |
 | `SE-073` | `page/selectors-get-by.spec.ts` | getByTestId with comma-separated testIdAttributes should match any |

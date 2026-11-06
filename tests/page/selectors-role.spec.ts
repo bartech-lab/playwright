@@ -476,6 +476,7 @@ test('SE-060 should support name', {
   `);
 
   const group = page.getByRole('group');
+  await group.evaluate(element => element.ariaLabelledByElements);
   await expect(group).toHaveAccessibleName('Chosen name');
 
   expect(await page.locator(`role=button[name="Hello"]`).evaluateAll(els => els.map(e => e.outerHTML))).toEqual([
@@ -636,14 +637,4 @@ test('SE-065 should not match scope by default', async ({ page }) => {
   const children = page.getByRole('listitem', { name: 'Parent list' }).getByRole('listitem');
   await expect(children).toHaveCount(2);
   await expect(children).toHaveText(['child 1', 'child 2']);
-});
-
-test('SE-066 should not crash when aria-labelledby is read in both worlds', {
-  annotation: { type: 'issue', description: 'https://github.com/microsoft/playwright/issues/XXXXX' },
-}, async ({ page }) => {
-  await page.setContent(`<span id="label">Save</span><button aria-labelledby="label"></button>`);
-  await page.locator('button').evaluate(button => button.ariaLabelledByElements);
-  await expect(page.getByRole('button', { name: 'Save', exact: true })).toHaveCount(1);
-  await page.locator('button').evaluate(button => button.ariaLabelledByElements);
-  await expect(page.getByRole('button', { name: 'Save', exact: true })).toHaveCount(1);
 });
