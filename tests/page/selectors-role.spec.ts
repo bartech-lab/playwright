@@ -462,7 +462,10 @@ test('SE-059 should filter hidden, unless explicitly asked for', async ({ page }
 });
 
 test('SE-060 should support name', {
-  annotation: { type: 'issue', description: 'https://github.com/microsoft/playwright/issues/43549' },
+  annotation: [
+    { type: 'issue', description: 'https://github.com/microsoft/playwright/issues/43549' },
+    { type: 'issue', description: 'https://github.com/microsoft/playwright/issues/43967' },
+  ],
 }, async ({ page, browserName, browserMajorVersion }) => {
   await page.setContent(`
     <div role="button" aria-label=" Hello "></div>
